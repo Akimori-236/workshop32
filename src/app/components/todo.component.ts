@@ -1,5 +1,5 @@
-import { Component, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Task } from './models';
 import { Subject } from 'rxjs';
 
@@ -8,10 +8,12 @@ import { Subject } from 'rxjs';
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
-export class TodoComponent {
+export class TodoComponent implements OnChanges {
 
   @Output()
   onSetTask = new Subject<Task>()
+  @Input()
+  selectedTask!: Task
 
   todoForm!: FormGroup
 
@@ -30,5 +32,18 @@ export class TodoComponent {
     console.debug("NEW TASK>>>", task)
     this.onSetTask.next(task)
     this.todoForm.reset()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.debug("Changes>>>", changes)
+    const t:Task = changes['selectedTask'].currentValue
+    // get FormControls
+    const descControl = this.todoForm.get('desc') as FormControl
+    const priorityControl = this.todoForm.get('priority') as FormControl
+    const dueControl = this.todoForm.get('due') as FormControl
+    // set Values
+    descControl.setValue(t.desc)
+    priorityControl.setValue(t.priority)
+    dueControl.setValue(t.due)
   }
 }

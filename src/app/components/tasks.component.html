@@ -2,14 +2,18 @@
   <h1 class="text-warning m-2">Tasks</h1>
   <table class="col-12">
     <tbody *ngFor="let task of taskList; let i = index">
-      <tr class="border m-2 row" (click)="selectTask(i)">
+      <tr class="border m-2 row">
         <div class="col-10">
           <div class="row">
-            <h4 class="ms-2 fw-bold">{{ task.desc }}</h4>
+            <h4 class="ms-2 fw-bold" (click)="selectTask(i)">
+              {{ task.desc | titlecase }}
+            </h4>
           </div>
           <div class="row">
-            <td class="col-auto me-auto ms-2">{{ task.priority }}</td>
-            <td class="col-auto me-2">{{ task.due }}</td>
+            <td class="col-auto me-auto ms-2">
+              {{ task.priority | titlecase }}
+            </td>
+            <td class="col-auto me-2">{{ task.due | titlecase }}</td>
           </div>
         </div>
 

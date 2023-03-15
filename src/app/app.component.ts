@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Task } from './components/models';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ export class AppComponent {
 
   taskList: Task[] = []
 
+  selectedTask!: Task
+
   saveTask(newTask: Task) {
     this.taskList.push(newTask)
     console.debug("Task Saved>>>", newTask)
@@ -18,5 +21,17 @@ export class AppComponent {
 
   deleteTask(index: number) {
     this.taskList.splice(index, 1)
+  }
+
+  selectTask(index: number) {
+    const t = this.taskList.at(index)
+    if (!!t) {
+      this.selectedTask = {
+        index: index,
+        desc: t.desc,
+        priority: t.priority,
+        due: t.due
+      }
+    }
   }
 }

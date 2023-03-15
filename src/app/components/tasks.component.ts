@@ -15,12 +15,15 @@ export class TasksComponent {
   @Output()
   onDelete = new Subject<number>()
 
+  @Output()
+  onSelect = new Subject<number>()
+
   deleteTask(index: number) {
     // this.taskList.splice(index, 1)
     this.onDelete.next(index)
   }
 
   selectTask(index: number) {
-
+    this.onSelect.next(index)
   }
 }

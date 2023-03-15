@@ -1,4 +1,9 @@
 <div class="container">
-  <app-todo (onSetTask)="saveTask($event)" ></app-todo>
-  <app-tasks [taskList]="taskList" (onDelete)="deleteTask($event)"></app-tasks>
+  <app-todo (onSetTask)="saveTask($event)" [selectedTask]="selectedTask"></app-todo>
+  <app-tasks
+    [taskList]="taskList"
+    (onDelete)="deleteTask($event)"
+    (onSelect)="selectTask($event)"
+  >
+  </app-tasks>
 </div>
