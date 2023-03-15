@@ -29,6 +29,6 @@ export class TodoComponent {
     const task = this.todoForm.value as Task
     console.debug("NEW TASK>>>", task)
     this.onSetTask.next(task)
-    this.todoForm.reset
+    this.todoForm.reset()
   }
 }

@@ -11,5 +11,7 @@ export class TasksComponent {
   @Input()
   taskList!: Task[]
 
-  
+  deleteTask(index: number) {
+    this.taskList.splice(index, 1)
+  }
 }
