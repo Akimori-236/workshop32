@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h1 class="text-warning">ToDo</h1>
+  <form class="form" [formGroup]="todoForm" (ngSubmit)="setTask()">
+    <table>
+      <tr>
+        <td><label class="m-2">Description:</label></td>
+        <td colspan="3"><input type="text" formControlName="desc" /></td>
+      </tr>
+      <tr>
+        <td><label class="m-2">Priority:</label></td>
+        <td>
+          <label class="m-2">High </label>
+          <input type="radio" value="high" formControlName="priority" />
+        </td>
+        <td>
+          <label class="m-2">Medium </label>
+          <input type="radio" value="medium" formControlName="priority" />
+        </td>
+        <td>
+          <label class="m-2">Low </label>
+          <input type="radio" value="low" formControlName="priority" />
+        </td>
+      </tr>
+      <tr>
+        <td><label class="m-2">Due:</label></td>
+        <td colspan="3"><input type="text" formControlName="due" /></td>
+      </tr>
+    </table>
+    <div class="">
+      <ng-content></ng-content>
+      <button class="btn btn-warning" type="submit">Add</button>
+    </div>
+  </form>
+</div>

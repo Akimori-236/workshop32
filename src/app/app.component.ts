@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Task } from './components/models';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'workshop32';
+
+  @Input()
+  taskList: Task[] = []
+
+  saveTask(newTask: Task) {
+    this.taskList.push(newTask)
+    console.debug("Task Saved>>>", newTask)
+  }
 }

@@ -1,0 +1,16 @@
+<div class="mt-5 border">
+  <h1 class="text-warning m-2">Tasks</h1>
+  <table class="col-12">
+    <tbody *ngFor="let task of taskList; let i = index">
+      <div class="border m-2">
+        <tr class="row">
+          <h4 class="ms-2 fw-bold">{{ task.desc }}</h4>
+        </tr>
+        <tr class="row">
+          <td class="col-auto me-auto ms-2">{{ task.priority }}</td>
+          <td class="col-auto me-2">{{ task.due }}</td>
+        </tr>
+      </div>
+    </tbody>
+  </table>
+</div>
