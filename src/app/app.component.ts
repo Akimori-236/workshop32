@@ -9,11 +9,14 @@ import { Task } from './components/models';
 export class AppComponent {
   title = 'workshop32';
 
-  @Input()
   taskList: Task[] = []
 
   saveTask(newTask: Task) {
     this.taskList.push(newTask)
     console.debug("Task Saved>>>", newTask)
+  }
+
+  deleteTask(index: number) {
+    this.taskList.splice(index, 1)
   }
 }

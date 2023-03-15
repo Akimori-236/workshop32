@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Task } from './models';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
@@ -11,7 +12,15 @@ export class TasksComponent {
   @Input()
   taskList!: Task[]
 
+  @Output()
+  onDelete = new Subject<number>()
+
   deleteTask(index: number) {
-    this.taskList.splice(index, 1)
+    // this.taskList.splice(index, 1)
+    this.onDelete.next(index)
+  }
+
+  selectTask(index: number) {
+
   }
 }

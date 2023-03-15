@@ -2,7 +2,7 @@
   <h1 class="text-warning m-2">Tasks</h1>
   <table class="col-12">
     <tbody *ngFor="let task of taskList; let i = index">
-      <tr class="border m-2 row">
+      <tr class="border m-2 row" (click)="selectTask(i)">
         <div class="col-10">
           <div class="row">
             <h4 class="ms-2 fw-bold">{{ task.desc }}</h4>
@@ -14,7 +14,13 @@
         </div>
 
         <div class="col-2 my-auto ms-auto">
-          <button class="btn btn-outline-danger h-100" type="button" (click)="deleteTask(i)">Delete</button>
+          <button
+            class="btn btn-outline-danger h-100"
+            type="button"
+            (click)="deleteTask(i)"
+          >
+            Delete
+          </button>
         </div>
       </tr>
     </tbody>
