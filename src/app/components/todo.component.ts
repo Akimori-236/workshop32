@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Task } from './models';
-import { Subject } from 'rxjs';
+import { Observable, Subject, map, startWith, tap } from 'rxjs';
 
 @Component({
   selector: 'app-todo',
@@ -36,7 +36,7 @@ export class TodoComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.debug("Changes>>>", changes)
-    const t:Task = changes['selectedTask'].currentValue
+    const t: Task = changes['selectedTask'].currentValue
     // get FormControls
     const descControl = this.todoForm.get('desc') as FormControl
     const priorityControl = this.todoForm.get('priority') as FormControl
@@ -45,5 +45,17 @@ export class TodoComponent implements OnChanges {
     descControl.setValue(t.desc)
     priorityControl.setValue(t.priority)
     dueControl.setValue(t.due)
+  }
+
+  get isInvalid$(): Observable<boolean> {
+    // stream that keeps checking after every change
+    return this.todoForm.statusChanges.pipe(
+      tap(v => {
+        console.log("Form Status >>> ", v)
+      }),
+      startWith("INVALID"), // initial value to send
+      map(v => "INVALID" == v) // keep checking
+    )
+
   }
 }

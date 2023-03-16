@@ -1,13 +1,14 @@
-import { Component, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, Input, Output, ViewChild } from '@angular/core';
 import { Task } from './components/models';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { TodoComponent } from './components/todo.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'workshop32';
 
   taskList: Task[] = []
@@ -32,6 +33,25 @@ export class AppComponent {
         priority: t.priority,
         due: t.due
       }
+    }
+  }
+
+  @ViewChild(TodoComponent)
+  todoComp!: TodoComponent
+  isUpdateInvalid!: Observable<boolean>
+
+  ngAfterViewInit(): void {
+    // update validity of child form
+    this.isUpdateInvalid = this.todoComp.isInvalid$
+  }
+  updateTask() {
+    let updated: Task = this.todoComp.todoForm.value as Task
+    updated.index = this.selectedTask.index
+    console.debug("Updated >>> ", updated) // sanity check
+    // send to task list
+    if (!!updated.index) {
+      this.taskList.splice(updated.index,1,updated)
+      this.todoComp.todoForm.reset()
     }
   }
 }
