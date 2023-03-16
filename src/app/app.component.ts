@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Task } from './components/models';
 import { Observable, Subject } from 'rxjs';
 import { TodoComponent } from './components/todo.component';
@@ -14,6 +14,13 @@ export class AppComponent implements AfterViewInit {
   taskList: Task[] = []
 
   selectedTask!: Task
+  get taskIndex() {
+    if (this.selectedTask.index) {
+      return this.selectedTask.index
+    } else {
+      return -1
+    }
+  }
 
   saveTask(newTask: Task) {
     this.taskList.push(newTask)

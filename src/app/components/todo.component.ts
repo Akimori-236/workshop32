@@ -26,6 +26,10 @@ export class TodoComponent implements OnChanges {
       due: this.fb.control<string>('', [Validators.required]),
     })
   }
+  // GETTER
+  get value(): Task {
+    return this.todoForm.value as Task
+  }
 
   setTask() {
     const task = this.todoForm.value as Task
