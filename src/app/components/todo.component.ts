@@ -26,6 +26,10 @@ export class TodoComponent implements OnChanges {
       due: this.fb.control<string>('', [Validators.required]),
     })
   }
+  // GETTER
+  get value(): Task {
+    return this.todoForm.value as Task
+  }
 
   setTask() {
     const task = this.todoForm.value as Task
@@ -36,7 +40,7 @@ export class TodoComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.debug("Changes>>>", changes)
-    const t:Task = changes['selectedTask'].currentValue
+    const t: Task = changes['selectedTask'].currentValue
     // get FormControls
     const descControl = this.todoForm.get('desc') as FormControl
     const priorityControl = this.todoForm.get('priority') as FormControl

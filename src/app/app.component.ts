@@ -1,6 +1,7 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
 import { Task } from './components/models';
 import { Subject } from 'rxjs';
+import { TodoComponent } from './components/todo.component';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,13 @@ export class AppComponent {
   taskList: Task[] = []
 
   selectedTask!: Task
+  get taskIndex() {
+    if (this.selectedTask.index) {
+      return this.selectedTask.index
+    } else {
+      return -1
+    }
+  }
 
   saveTask(newTask: Task) {
     this.taskList.push(newTask)
@@ -33,5 +41,15 @@ export class AppComponent {
         due: t.due
       }
     }
+  }
+
+  @ViewChild(TodoComponent)
+  toDoComp!: TodoComponent
+  // @ViewChild('modifyButton')
+  // modifyBtnRef!: ElementRef
+
+  modifyTask() {
+    let t: Task = this.toDoComp.value
+    t.index = this.taskIndex
   }
 }

@@ -1,5 +1,7 @@
 <div class="container">
-  <app-todo (onSetTask)="saveTask($event)" [selectedTask]="selectedTask"></app-todo>
+  <app-todo (onSetTask)="saveTask($event)" [selectedTask]="selectedTask">
+    <button type="button" class="btn btn-outline-warning mx-3" (click)="modifyTask()">Modify</button>
+  </app-todo>
   <app-tasks
     [taskList]="taskList"
     (onDelete)="deleteTask($event)"

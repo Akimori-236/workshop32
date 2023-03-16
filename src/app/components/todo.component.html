@@ -4,31 +4,31 @@
     <table>
       <tr>
         <td><label class="m-2">Description:</label></td>
-        <td colspan="3"><input type="text" formControlName="desc" /></td>
+        <td colspan="3"><input class="form-control" type="text" formControlName="desc" /></td>
       </tr>
       <tr>
         <td><label class="m-2">Priority:</label></td>
         <td>
-          <label class="m-2">High </label>
-          <input type="radio" value="high" formControlName="priority" />
+          <label class="m-2 my-auto">High </label>
+          <input type="radio" value="high" class="form-check-input my-auto" formControlName="priority" />
         </td>
         <td>
           <label class="m-2">Medium </label>
-          <input type="radio" value="medium" formControlName="priority" />
+          <input type="radio" value="medium" class="form-check-input" formControlName="priority" />
         </td>
         <td>
           <label class="m-2">Low </label>
-          <input type="radio" value="low" formControlName="priority" />
+          <input type="radio" value="low" class="form-check-input" formControlName="priority" />
         </td>
       </tr>
       <tr>
         <td><label class="m-2">Due:</label></td>
-        <td colspan="3"><input type="text" formControlName="due" /></td>
+        <td colspan="3"><input class="form-control" type="text" formControlName="due" /></td>
       </tr>
     </table>
-    <div class="">
+    <div class="d-flex justify-content-end">
       <ng-content></ng-content>
-      <button class="btn btn-warning" type="submit">Add</button>
+      <button class="btn btn-warning" type="submit" [disabled]="todoForm.invalid">Add</button>
     </div>
   </form>
 </div>
