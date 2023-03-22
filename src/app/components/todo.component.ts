@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Task } from './models';
 import { Observable, Subject, map, startWith, tap } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { Observable, Subject, map, startWith, tap } from 'rxjs';
 export class TodoComponent implements OnChanges {
 
   @Output()
-  onSetTask = new Subject<Task>()
+  onSetTask = new Subject<Task>
   @Input()
   selectedTask!: Task
 
@@ -23,7 +23,7 @@ export class TodoComponent implements OnChanges {
     this.todoForm = this.fb.group({
       desc: this.fb.control<string>('', [Validators.required]),
       priority: this.fb.control<string>('', [Validators.required]),
-      due: this.fb.control<string>('', [Validators.required]),
+      due: this.fb.control<Date>(new Date(), [Validators.required, this.futureDateValidator()]),
     })
   }
   // GETTER
@@ -51,6 +51,7 @@ export class TodoComponent implements OnChanges {
     dueControl.setValue(t.due)
   }
 
+  // constant update if the form is valid or not
   get isInvalid$(): Observable<boolean> {
     // stream that keeps checking after every change
     return this.todoForm.statusChanges.pipe(
@@ -60,6 +61,14 @@ export class TodoComponent implements OnChanges {
       startWith("INVALID"), // initial value to send
       map(v => "INVALID" == v) // keep checking
     )
+  }
 
+  // Custom Validator creation for date checking
+  futureDateValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const selectedDate = new Date(control.value)
+      const currentDate = new Date()
+      return selectedDate >= currentDate ? null : { 'invalidDate': true }
+    }
   }
 }

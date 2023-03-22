@@ -52,12 +52,14 @@ export class AppComponent implements AfterViewInit {
     this.isUpdateInvalid = this.todoComp.isInvalid$
   }
   updateTask() {
+    // grab form values from child component
     let updated: Task = this.todoComp.todoForm.value as Task
+    // which task to update?
     updated.index = this.selectedTask.index
     console.debug("Updated >>> ", updated) // sanity check
     // send to task list
-    if (!!updated.index) {
-      this.taskList.splice(updated.index,1,updated)
+    if (updated.index != undefined) {
+      this.taskList.splice(updated.index, 1, updated)
       this.todoComp.todoForm.reset()
     }
   }

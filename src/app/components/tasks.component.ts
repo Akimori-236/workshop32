@@ -13,10 +13,10 @@ export class TasksComponent {
   taskList!: Task[]
 
   @Output()
-  onDelete = new Subject<number>()
+  onDelete = new Subject<number>
 
   @Output()
-  onSelect = new Subject<number>()
+  onSelect = new Subject<number>
 
   deleteTask(index: number) {
     // this.taskList.splice(index, 1)
