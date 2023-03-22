@@ -45,11 +45,12 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild(TodoComponent)
   todoComp!: TodoComponent
-  isUpdateInvalid!: Observable<boolean>
+  isFormInvalid!: Observable<boolean>
 
   ngAfterViewInit(): void {
-    // update validity of child form
-    this.isUpdateInvalid = this.todoComp.isInvalid$
+    // get a stream of validity of child form
+    // so that the update button get constantly updated if the form is valid
+    this.isFormInvalid = this.todoComp.isFormInvalid$
   }
   updateTask() {
     // grab form values from child component

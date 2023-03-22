@@ -52,7 +52,7 @@ export class TodoComponent implements OnChanges {
   }
 
   // constant update if the form is valid or not
-  get isInvalid$(): Observable<boolean> {
+  get isFormInvalid$(): Observable<boolean> {
     // stream that keeps checking after every change
     return this.todoForm.statusChanges.pipe(
       tap(v => {
