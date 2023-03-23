@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Task } from './components/models';
 import { Observable, Subject } from 'rxjs';
 import { TodoComponent } from './components/todo.component';
@@ -47,6 +47,7 @@ export class AppComponent implements AfterViewInit {
   todoComp!: TodoComponent
   isFormInvalid!: Observable<boolean>
 
+  // getting NG0100 error with ngAfterViewInit
   ngAfterViewInit(): void {
     // get a stream of validity of child form
     // so that the update button get constantly updated if the form is valid
