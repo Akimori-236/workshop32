@@ -1,6 +1,6 @@
 export interface Task {
     index?: number
-    desc: string
+    description: string
     priority: string
-    due: Date
+    dueDate: Date
 }

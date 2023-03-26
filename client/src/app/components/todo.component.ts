@@ -21,9 +21,9 @@ export class TodoComponent implements OnChanges {
 
   ngOnInit(): void {
     this.todoForm = this.fb.group({
-      desc: this.fb.control<string>('', [Validators.required]),
+      description: this.fb.control<string>('', [Validators.required]),
       priority: this.fb.control<string>('', [Validators.required]),
-      due: this.fb.control<Date>(new Date(), [Validators.required, this.futureDateValidator()]),
+      dueDate: this.fb.control<Date>(new Date(), [Validators.required, this.futureDateValidator()]),
     })
   }
   // GETTER
@@ -46,9 +46,9 @@ export class TodoComponent implements OnChanges {
     const priorityControl = this.todoForm.get('priority') as FormControl
     const dueControl = this.todoForm.get('due') as FormControl
     // set Values
-    descControl.setValue(t.desc)
+    descControl.setValue(t.description)
     priorityControl.setValue(t.priority)
-    dueControl.setValue(t.due)
+    dueControl.setValue(t.dueDate)
   }
 
   // constant update if the form is valid or not

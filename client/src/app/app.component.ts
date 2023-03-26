@@ -14,12 +14,17 @@ export class AppComponent implements AfterViewInit {
   taskList: Task[] = []
 
   selectedTask!: Task
+
   get taskIndex() {
     if (this.selectedTask.index) {
       return this.selectedTask.index
     } else {
       return -1
     }
+  }
+
+  get isTaskListInvalid(): boolean {
+    return this.taskList.length < 1
   }
 
   saveTask(newTask: Task) {
@@ -36,9 +41,9 @@ export class AppComponent implements AfterViewInit {
     if (!!t) {
       this.selectedTask = {
         index: index,
-        desc: t.desc,
+        description: t.description,
         priority: t.priority,
-        due: t.due
+        dueDate: t.dueDate
       }
     }
   }
@@ -64,5 +69,9 @@ export class AppComponent implements AfterViewInit {
       this.taskList.splice(updated.index, 1, updated)
       this.todoComp.todoForm.reset()
     }
+  }
+
+  saveList() {
+    
   }
 }
